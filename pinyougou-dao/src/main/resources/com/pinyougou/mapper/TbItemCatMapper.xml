@@ -193,4 +193,24 @@
       type_id = #{typeId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+ <!--  <select id="selectNameList" resultType="Map">
+  	select id,name as text from tb_item_cat
+  </select> -->
+  <sql id="Base_Column_List1" >
+    id,name as text
+  </sql>
+  <select id="selectNameList" resultType="Map" parameterType="com.pinyougou.pojo.TbItemCatExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List1" />
+    from tb_item_cat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
 </mapper>

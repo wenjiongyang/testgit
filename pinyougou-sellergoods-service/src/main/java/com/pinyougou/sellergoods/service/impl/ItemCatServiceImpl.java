@@ -1,5 +1,7 @@
 package com.pinyougou.sellergoods.service.impl;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
@@ -11,6 +13,7 @@ import com.pinyougou.pojo.TbItemCatExample.Criteria;
 import com.pinyougou.sellergoods.service.ItemCatService;
 
 import entity.PageResult;
+import ex.haveNextListException;
 
 /**
  * 服务实现层
@@ -70,16 +73,22 @@ public class ItemCatServiceImpl implements ItemCatService {
 
 	/**
 	 * 批量删除
+	 * @throws haveNextListException 
 	 */
 	@Override
-	public void delete(Long[] ids) {
+	public void delete(Long[] ids) throws haveNextListException {
 		for(Long id:ids){
-			itemCatMapper.deleteByPrimaryKey(id);
+			if(findByParentId(id).size()==0){
+				itemCatMapper.deleteByPrimaryKey(id);
+			}else{
+				throw new haveNextListException("删除失败，含有下级元素。");
+			}
+			
 		}		
 	}
 	
 	
-		@Override
+	@Override
 	public PageResult findPage(TbItemCat itemCat, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		
@@ -96,5 +105,25 @@ public class ItemCatServiceImpl implements ItemCatService {
 		Page<TbItemCat> page= (Page<TbItemCat>)itemCatMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
+
+		/**
+		 * 根据上级ID查询列表
+		 * @param parentId
+		 * @return
+		 */
+		@Override
+		public List<TbItemCat> findByParentId(Long parentId) {
+			 TbItemCatExample example = new TbItemCatExample();
+			 Criteria criteria = example.createCriteria();
+			 criteria.andParentIdEqualTo(parentId);
+			return itemCatMapper.selectByExample(example);
+		}
+		
+		public List<Map> selectNameList(Long parentId){
+			TbItemCatExample example = new TbItemCatExample();
+			 Criteria criteria = example.createCriteria();
+			 criteria.andParentIdEqualTo(parentId);
+			return itemCatMapper.selectNameList(example);
+		}
 	
 }

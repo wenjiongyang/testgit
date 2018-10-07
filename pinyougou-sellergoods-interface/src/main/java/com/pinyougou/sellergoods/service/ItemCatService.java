@@ -1,8 +1,11 @@
 package com.pinyougou.sellergoods.service;
 import java.util.List;
+import java.util.Map;
+
 import com.pinyougou.pojo.TbItemCat;
 
 import entity.PageResult;
+import ex.haveNextListException;
 /**
  * 服务层接口
  * @author Administrator
@@ -47,8 +50,9 @@ public interface ItemCatService {
 	/**
 	 * 批量删除
 	 * @param ids
+	 * @throws haveNextListException 
 	 */
-	public void delete(Long[] ids);
+	public void delete(Long[] ids) throws haveNextListException;
 
 	/**
 	 * 分页
@@ -57,5 +61,18 @@ public interface ItemCatService {
 	 * @return
 	 */
 	public PageResult findPage(TbItemCat itemCat, int pageNum, int pageSize);
+	
+	/**
+	 * 根据parentId查找商品分类列表
+	 * @param parentId
+	 * @return
+	 */
+	public List<TbItemCat> findByParentId(Long parentId);
+	
+	/**
+	 * 名称下拉数据存储
+	 * @return
+	 */
+	public List<Map> selectNameList(Long parentId);
 	
 }
