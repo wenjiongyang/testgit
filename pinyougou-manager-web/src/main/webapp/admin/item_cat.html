@@ -41,6 +41,11 @@
 		                        <li>
 		                       		<a href="#" ng-click="grade=2;selectList(entity_1)" >{{entity_1.name}}</a>
 		                        </li>
+		                        <span ng-if="grade==1">
+		                        <li  style="content: none;">
+		                        	<a href="#" ng-click="grade=3;selectList(entity_2)" >{{entity_2.name}}</a>
+		                        </li>
+		                        </span>
 		                        <li>
 		                        	<a href="#" ng-click="grade=3;selectList(entity_2)" >{{entity_2.name}}</a>
 		                        </li>
