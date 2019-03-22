@@ -27,4 +27,6 @@ public interface TbSellerMapper {
     int updateByPrimaryKeySelective(TbSeller record);
 
     int updateByPrimaryKey(TbSeller record);
+    
+    String findPwdBySellerId(String sid);
 }

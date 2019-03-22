@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-	<title>TShow运营商运营管理后台</title>
+	<title>易品购运营商运营管理后台</title>
 	 <link rel="icon" href="../assets/img/favicon.ico">
 
 
@@ -16,7 +16,7 @@
 <body>
 	<div class="loginmanage">
 		<div class="py-container">
-			<h4 class="manage-title">TShow运营商运营管理后台</h4>
+			<h4 class="manage-title">易品购运营商运营管理后台</h4>
 			<div class="loginform">
 
 				<ul class="sui-nav nav-tabs tab-wraped">
@@ -33,8 +33,8 @@
 				</ul>
 				<div class="tab-content tab-wraped">
 					<div id="index" class="tab-pane">
-						<p>二维码登录，暂为官网二维码</p>
-						<img src="../img/wx_cz.jpg" />
+						<p>二维码登录，本功能暂未实现</p>
+						<!-- <img src="../img/wx_cz.jpg" /> -->
 					</div>
 					<div id="profile" class="tab-pane  active">
 						<form class="sui-form" method="post" action="/login" id="loginform">
@@ -47,11 +47,11 @@
 							<div class="setting">
 								 <div id="slider">
 									<div id="slider_bg"></div>
-									<span id="label">>></span> <span id="labelTip">拖动滑块验证</span>
+									<span id="label" style="cursor: pointer;">>></span> <span id="labelTip">拖动滑块验证</span>
 									</div>
 							</div>
 							<div class="logined">
-								<a class="sui-btn btn-block btn-xlarge btn-danger" onclick="document:loginform.submit()" target="_blank">登&nbsp;&nbsp;录</a>
+								<a class="sui-btn btn-block btn-xlarge btn-danger"  target="_blank">登&nbsp;&nbsp;录</a>
 							</div>
 						</form>
 
@@ -71,11 +71,11 @@
 			<li>联系客服</li>
 			<li>商家入驻</li>
 			<li>营销中心</li>
-			<li>手机品优购</li>
+			<li>手机易品购</li>
 			<li>销售联盟</li>
-			<li>品优购社区</li>
+			<li>易品购社区</li>
 		</ul>
-		<div class="address">地址：北京市昌平区建材城西路金燕龙办公楼一层 邮编：100096 电话：400-618-4000 传真：010-82935100</div>
+		<div class="address">地址：中山西区*************** 邮编：100096 电话：400-618-4000 传真：010-82935100</div>
 		<div class="beian">京ICP备08001421号京公网安备110108007702
 		</div>
 	</div>
@@ -88,10 +88,15 @@
 <script>
 	$(function(){
 		var slider = new SliderUnlock("#slider",{
-				successLabelTip : "欢迎访问品优购"	
+				successLabelTip : "欢迎访问易品购",
+			 /* 	IsOk: false */
 			},function(){
-				// alert("验证成功,即将跳转至首页");
+				/* alert(IsOk);
+				alert(123); */
             	// window.location.href="index.html"
+				$('.logined').click(function(){
+					document:loginform.submit();
+            	})
         	});
         slider.init();
 	})

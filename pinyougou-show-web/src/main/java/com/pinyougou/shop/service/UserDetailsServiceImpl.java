@@ -34,7 +34,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		grantedAuthority.add(new SimpleGrantedAuthority("ROLE_SELLER"));
 		//username即为ID
 		TbSeller seller = sellerService.findOne(username);
-		
 		if(seller!=null){
 			if(seller.getStatus().equals("1")){
 				return new User(username, seller.getPassword(), grantedAuthority);
